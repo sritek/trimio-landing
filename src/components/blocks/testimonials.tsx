@@ -64,7 +64,7 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export const Testimonials = () => {
   return (
-    <section className="bg-background py-24 md:py-32 relative overflow-hidden">
+    <section id="about" className="bg-background py-24 md:py-32 relative overflow-hidden">
       {/* Background radial glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-20 pointer-events-none">
         <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full" />

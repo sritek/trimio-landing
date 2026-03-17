@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 export function FeatureBentoGrid() {
     return (
-        <section className="relative bg-background py-16 md:py-32 overflow-hidden">
+        <section id="solution" className="relative bg-background py-16 md:py-32 overflow-hidden">
             <GridVignetteBackground 
                 className="opacity-20 dark:opacity-40" 
                 x={50} 

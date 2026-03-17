@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { GridVignetteBackground } from '@/components/ui/vignette-grid-background'
+import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
 
 const transitionVariants = {
@@ -165,10 +166,11 @@ export function HeroSection() {
 }
 
 const menuItems = [
-    { name: 'Features', href: '#link' },
-    { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
-    { name: 'About', href: '#link' },
+    { name: 'Features', href: '#features' },
+    { name: 'Solution', href: '#solution' },
+    { name: 'Pricing', href: '#pricing' },
+    { name: 'About', href: '#about' },
+    { name: 'FAQ', href: '#faq' },
 ]
 
 const HeroHeader = () => {
@@ -238,26 +240,9 @@ const HeroHeader = () => {
                                 <ThemeToggle />
                                 <Button
                                     asChild
-                                    variant="outline"
                                     size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
-                                        <span>Login</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
-                                        <span>Sign Up</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-                                    <Link href="#">
+                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden md:inline-flex')}>
+                                    <Link href="#pricing">
                                         <span>Get Started</span>
                                     </Link>
                                 </Button>
@@ -271,9 +256,28 @@ const HeroHeader = () => {
 }
 
 const Logo = ({ className }: { className?: string }) => {
+    const { resolvedTheme } = useTheme()
+    const [mounted, setMounted] = React.useState(false)
+
+    React.useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return (
+            <span className={cn('text-2xl font-bold tracking-tighter text-foreground', className)}>
+                trimio.
+            </span>
+        )
+    }
+
+    const logoSrc = resolvedTheme === 'dark' ? '/logo-white.svg' : '/logo-black.svg'
+
     return (
-        <span className={cn('text-2xl font-bold tracking-tighter text-foreground', className)}>
-            trimio.
-        </span>
+        <img
+            src={logoSrc}
+            alt="trimio."
+            className={cn('h-7 w-auto', className)}
+        />
     )
 }

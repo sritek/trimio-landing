@@ -33,7 +33,7 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section className="bg-muted/50 px-6 py-24 sm:py-32">
+    <section id="faq" className="bg-muted/50 px-6 py-24 sm:py-32">
       <div className="mx-auto max-w-3xl">
         <div className="text-center mb-16">
           <h2 className="text-base font-semibold leading-7 text-primary">Support</h2>

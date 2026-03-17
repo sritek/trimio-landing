@@ -26,6 +26,7 @@ function InteractiveQueueCard() {
     { id: 'T-02', name: 'Walk-in guest', status: 'Waiting in lobby', type: 'waiting', wait: 8 },
     { id: 'T-03', name: 'Meena Joshi', status: 'Waiting in lobby', type: 'waiting', wait: 20 },
   ])
+  const [hasAdded, setHasAdded] = useState(false)
 
   const callNext = () => {
     setQueue(prev => {
@@ -38,6 +39,8 @@ function InteractiveQueueCard() {
   }
 
   const addWalkIn = () => {
+    if (hasAdded) return
+    setHasAdded(true)
     setQueue(prev => [
       ...prev,
       { 
@@ -59,9 +62,11 @@ function InteractiveQueueCard() {
           <div className="w-3 h-3 rounded-full bg-green-400" />
         </div>
         <div className="flex space-x-2">
-          <button onClick={addWalkIn} className="text-xs bg-primary/10 text-primary hover:bg-primary/20 px-2 py-1 rounded-md transition font-medium flex items-center">
-            <UserPlus className="w-3 h-3 mr-1" /> Add
-          </button>
+          {!hasAdded && (
+            <button onClick={addWalkIn} className="text-xs bg-primary/10 text-primary hover:bg-primary/20 px-2 py-1 rounded-md transition font-medium flex items-center">
+              <UserPlus className="w-3 h-3 mr-1" /> Add
+            </button>
+          )}
           <span className="text-sm font-medium text-muted-foreground px-2 py-1">Live Queue</span>
         </div>
       </div>
@@ -407,7 +412,7 @@ function InteractiveInventoryAlert() {
 // --- Main Layout Component ---
 export function FeatureZigzag() {
   return (
-    <section className="bg-background py-24 md:py-32 overflow-hidden relative">
+    <section id="features" className="bg-background py-24 md:py-32 overflow-hidden relative">
       {/* Background Soft Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-10 pointer-events-none">
         <div className="absolute inset-0 bg-primary/30 blur-[120px] rounded-full" />
