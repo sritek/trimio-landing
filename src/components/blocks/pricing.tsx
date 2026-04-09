@@ -14,8 +14,8 @@ const plans = [
   {
     name: "Starter",
     description: "Great for small salons and startups looking to digitize their operations with Trimio",
-    price: 1999,
-    yearlyPrice: 19990,
+    price: 799,
+    yearlyPrice: 8399,
     buttonText: "Get started",
     buttonVariant: "outline" as const,
     includes: [
@@ -25,14 +25,14 @@ const plans = [
       "Basic inventory alerts",
       "UPI & Cash billing",
       "2-factor authentication",
-      "Daily backup",
+      "Staff Attendence",
     ],
   },
   {
     name: "Growth",
     description: "Best value for growing salons that need more advanced marketing and analytics",
-    price: 4999,
-    yearlyPrice: 49990,
+    price: 999,
+    yearlyPrice: 9999,
     buttonText: "Get started",
     buttonVariant: "default" as const,
     popular: true,
@@ -49,13 +49,13 @@ const plans = [
   {
     name: "Enterprise",
     description: "Built for multi-branch chains requiring absolute control and custom integrations",
-    price: 12999,
-    yearlyPrice: 129990,
+    price: 1299,
+    yearlyPrice: 12999,
     buttonText: "Contact Sales",
     buttonVariant: "outline" as const,
     includes: [
       "Everything in Growth, plus:",
-      "Unlimited staff & branches",
+      "Unlimited staff for branch",
       "Multi-board management",
       "Cross-branch inventory",
       "Dedicated account manager",
@@ -109,7 +109,7 @@ const PricingSwitch = ({ onSwitch }: { onSwitch: (value: string) => void }) => {
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           )}
-          <span className="relative flex items-center gap-2">Yearly (Save 20%)</span>
+          <span className="relative flex items-center gap-2">Yearly</span>
         </button>
       </div>
     </div>
@@ -220,26 +220,24 @@ export function Pricing() {
           </VerticalCutReveal>
         </h2>
 
-        <TimelineContent
-          as="div"
-          animationNum={0}
-          timelineRef={pricingRef}
-          customVariants={revealVariants}
+        <motion.div
+          initial={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="text-muted-foreground px-6"
         >
           Trusted by thousands of salons, we help teams all around the world. Explore which
           option is right for you.
-        </TimelineContent>
+        </motion.div>
 
-        <TimelineContent
-          as="div"
-          animationNum={1}
-          timelineRef={pricingRef}
-          customVariants={revealVariants}
+        <motion.div
+          initial={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.5, delay: 0.8 }}
           className="pt-4"
         >
           <PricingSwitch onSwitch={togglePricingPeriod} />
-        </TimelineContent>
+        </motion.div>
       </article>
 
       <div
@@ -271,6 +269,11 @@ export function Pricing() {
                 !plan.popular && "z-10"
               )}
             >
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+                  Most Popular
+                </div>
+              )}
               <CardHeader className="text-left p-6">
                 <div className="flex justify-between">
                   <h3 className="text-3xl font-bold mb-2">{plan.name}</h3>
@@ -302,6 +305,7 @@ export function Pricing() {
                       ? "bg-gradient-to-t from-blue-500 to-blue-600 shadow-lg shadow-blue-800 border border-blue-500 text-white hover:opacity-90"
                       : "bg-gradient-to-t from-neutral-200 to-neutral-100 dark:from-neutral-950 dark:to-neutral-600 shadow-lg border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white hover:opacity-90 shadow-neutral-400/20 dark:shadow-neutral-900"
                   )}
+                  onClick={() => {}}
                 >
                   {plan.buttonText}
                 </button>
@@ -327,6 +331,10 @@ export function Pricing() {
           </TimelineContent>
         ))}
       </div>
+
+      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6 px-6">
+        All plans include a 14-day free trial. No credit card required.
+      </p>
     </div>
   );
 }

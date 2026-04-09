@@ -8,6 +8,7 @@ import {
   CalendarClock, CreditCard, Loader2, UserPlus, ArrowRight, 
   Sparkles, Award, BarChart3, TrendingUp
 } from 'lucide-react'
+import { OptimizedImage } from '@/components/seo/optimized-image'
 
 // --- Setup default animation variants ---
 const fadeUp = {
@@ -227,7 +228,13 @@ function InteractivePayrollCard() {
       <div className="bg-primary/5 border-b p-4 sm:p-6 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
         <div className="flex items-center space-x-4">
           <div className="relative">
-            <img src="https://avatars.githubusercontent.com/u/102558960?v=4" alt="Staff" className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-background shadow-sm relative z-10" />
+            <OptimizedImage 
+              src="https://avatars.githubusercontent.com/u/102558960?v=4" 
+              alt="Riya Kapoor, Senior Stylist at salon" 
+              width={56}
+              height={56}
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-background shadow-sm relative z-10" 
+            />
             <div className="absolute inset-0 rounded-full border-2 border-primary border-t-transparent animate-spin" style={{ animationDuration: '3s' }} />
           </div>
           <div>
@@ -412,7 +419,7 @@ function InteractiveInventoryAlert() {
 // --- Main Layout Component ---
 export function FeatureZigzag() {
   return (
-    <section id="features" className="bg-background py-24 md:py-32 overflow-hidden relative">
+    <section id="" className="bg-background py-24 md:py-32 overflow-hidden relative">
       {/* Background Soft Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-10 pointer-events-none">
         <div className="absolute inset-0 bg-primary/30 blur-[120px] rounded-full" />

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
+import { OptimizedImage } from "@/components/seo/optimized-image";
 
 export const TestimonialsColumn = (props: {
   className?: string;
@@ -25,22 +26,22 @@ export const TestimonialsColumn = (props: {
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
               {props.testimonials.map(({ text, image, name, role }, i) => (
-                <div className="p-8 md:p-10 rounded-3xl border bg-card shadow-lg shadow-primary/5 max-w-xs w-full transition-transform hover:-translate-y-1 hover:shadow-xl" key={i}>
-                  <div className="text-foreground leading-relaxed">"{text}"</div>
-                  <div className="flex items-center gap-3 mt-6">
-                    <img
+                <figure className="p-8 md:p-10 rounded-3xl border bg-card shadow-lg shadow-primary/5 max-w-xs w-full transition-transform hover:-translate-y-1 hover:shadow-xl" key={i}>
+                  <blockquote className="text-foreground leading-relaxed">"{text}"</blockquote>
+                  <figcaption className="flex items-center gap-3 mt-6">
+                    <OptimizedImage
                       width={40}
                       height={40}
                       src={image}
-                      alt={name}
+                      alt={`${name}, ${role}`}
                       className="h-10 w-10 rounded-full border border-border shadow-sm object-cover"
                     />
                     <div className="flex flex-col">
                       <div className="font-bold tracking-tight leading-5 text-foreground">{name}</div>
                       <div className="leading-5 text-sm text-muted-foreground tracking-tight mt-0.5">{role}</div>
                     </div>
-                  </div>
-                </div>
+                  </figcaption>
+                </figure>
               ))}
             </React.Fragment>
           )),

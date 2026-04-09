@@ -6,68 +6,45 @@ import { Pricing } from "@/components/blocks/pricing";
 import { FAQ } from "@/components/blocks/faq";
 import { Footer } from "@/components/blocks/footer";
 import { LogoCloud } from "@/components/ui/logo-cloud-3";
-import { cn } from "@/lib/utils";
 
 const logos = [
-  {
-    src: "https://svgl.app/library/nvidia-wordmark-light.svg",
-    alt: "Nvidia Logo",
-  },
-  {
-    src: "https://svgl.app/library/supabase_wordmark_light.svg",
-    alt: "Supabase Logo",
-  },
-  {
-    src: "https://svgl.app/library/openai_wordmark_light.svg",
-    alt: "OpenAI Logo",
-  },
-  {
-    src: "https://svgl.app/library/turso-wordmark-light.svg",
-    alt: "Turso Logo",
-  },
-  {
-    src: "https://svgl.app/library/vercel_wordmark.svg",
-    alt: "Vercel Logo",
-  },
-  {
-    src: "https://svgl.app/library/github_wordmark_light.svg",
-    alt: "GitHub Logo",
-  },
-  {
-    src: "https://svgl.app/library/claude-ai-wordmark-icon_light.svg",
-    alt: "Claude AI Logo",
-  },
-  {
-    src: "https://svgl.app/library/clerk-wordmark-light.svg",
-    alt: "Clerk Logo",
-  },
+  { src: "/customers/1.png", alt: "Salon customer testimonial logo", width: 128, height: 128 },
+  { src: "/customers/2.png", alt: "Beauty spa client logo", width: 128, height: 128 },
+  { src: "/customers/3.png", alt: "Wellness center partner logo", width: 128, height: 128 },
+  { src: "/customers/4.png", alt: "Hair salon client testimonial", width: 128, height: 128 },
+  { src: "/customers/5.png", alt: "Beauty business customer logo", width: 128, height: 128 },
+  { src: "/customers/6.png", alt: "Spa management client logo", width: 128, height: 128 },
+  { src: "/customers/7.png", alt: "Salon chain partner logo", width: 128, height: 128 },
+  { src: "/customers/8.png", alt: "Beauty industry client testimonial", width: 128, height: 128 },
+  { src: "/customers/9.png", alt: "Wellness business customer logo", width: 128, height: 128 },
+  { src: "/customers/10.png", alt: "Premium salon client logo", width: 128, height: 128 },
 ];
 
 export default function Home() {
   return (
-    <div className="font-[family-name:var(--font-geist-sans)]">
-      <HeroSection />
-      
-      <section className="relative mx-auto max-w-7xl py-16 md:py-24 px-6 overflow-hidden">
-        <h2 className="mb-8 text-center font-bold text-foreground text-3xl tracking-tighter md:text-6xl leading-[1.1]">
-          <span className="text-muted-foreground/60">Trusted by over 4,000+ experts.</span>
-          <br />
-          <span className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">Used by the leaders in Beauty & Wellness.</span>
-        </h2>
-        <div className="mx-auto my-8 h-px w-full bg-border [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
+      <div className="font-[family-name:var(--font-geist-sans)]">
+        <HeroSection />
+        
+        <section className="relative mx-auto max-w-7xl py-16 md:py-24 px-6 overflow-hidden">
+          <h2 className="mb-8 text-center font-bold text-foreground text-3xl tracking-tighter md:text-6xl leading-[1.1]">
+            <span className="text-muted-foreground/60">Trusted by over 1,000+ experts.</span>
+            <br />
+            <span className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">Used by the leaders in Beauty & Wellness.</span>
+          </h2>
+          <div className="mx-auto my-8 h-px w-full bg-border [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
 
-        <LogoCloud logos={logos} />
+          <LogoCloud logos={logos} />
 
-        <div className="mt-8 h-px w-full bg-border [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
-      </section>
+          <div className="mt-8 h-px w-full bg-border [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
+        </section>
 
-      <FeatureZigzag />
-      <FeatureBentoGrid />
-      <Testimonials />
-      <Pricing />
-      <FAQ />
-      <Footer />
-    </div>
+        <FeatureZigzag />
+        <FeatureBentoGrid />
+        <Testimonials />
+        <Pricing />
+        <FAQ />
+        <Footer />
+      </div>
   );
 }
 

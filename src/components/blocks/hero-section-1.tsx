@@ -2,13 +2,14 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, Menu, X, Hexagon, Triangle, Circle, Square, Cloud, Box, Globe, Cpu } from 'lucide-react'
+import { ArrowRight, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { GridVignetteBackground } from '@/components/ui/vignette-grid-background'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
+import { OptimizedImage } from '@/components/seo/optimized-image'
 
 const transitionVariants = {
     item: {
@@ -75,7 +76,7 @@ export function HeroSection() {
 
                                     <h1
                                         className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                                        Effortless Salon & Spa Management
+                                        The Only Management Software Built for Modern Salons
                                     </h1>
                                     <p
                                         className="mx-auto mt-8 max-w-2xl text-balance text-lg">
@@ -100,7 +101,6 @@ export function HeroSection() {
                                         key={1}
                                         className="bg-foreground/10 rounded-[14px] border p-0.5">
                                         <Button
-                                            asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
                                             <Link href="#link">
@@ -110,15 +110,18 @@ export function HeroSection() {
                                     </div>
                                     <Button
                                         key={2}
-                                        asChild
                                         size="lg"
                                         variant="ghost"
                                         className="h-10.5 rounded-xl px-5">
                                         <Link href="#link">
-                                            <span className="text-nowrap">Book a Demo</span>
+                                            <span className="text-nowrap">Watch 2-min Demo</span>
                                         </Link>
                                     </Button>
                                 </AnimatedGroup>
+
+                                <p className="mt-6 text-sm text-gray-500 dark:text-gray-400 text-center">
+                                    Trusted by 500+ salons · No credit card required · Cancel anytime
+                                </p>
                             </div>
                         </div>
 
@@ -140,19 +143,21 @@ export function HeroSection() {
                                     className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
                                 />
                                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                                    <img
+                                    <OptimizedImage
                                         className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block object-cover"
                                         src="/hero-dark.png"
-                                        alt="Trimio dark app screen"
-                                        width="2700"
-                                        height="1440"
+                                        alt="Trimio salon management software dashboard showing appointment scheduling, client management, and real-time analytics"
+                                        width={2700}
+                                        height={1440}
+                                        priority={true}
                                     />
-                                    <img
+                                    <OptimizedImage
                                         className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden object-cover"
                                         src="/hero-light.png"
-                                        alt="Trimio light app screen"
-                                        width="2700"
-                                        height="1440"
+                                        alt="Trimio salon management software dashboard showing appointment scheduling, client management, and real-time analytics"
+                                        width={2700}
+                                        height={1440}
+                                        priority={true}
                                     />
                                 </div>
                             </div>
@@ -239,12 +244,10 @@ const HeroHeader = () => {
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:items-center sm:gap-3 sm:space-y-0 md:w-fit">
                                 <ThemeToggle />
                                 <Button
-                                    asChild
+                                    render={<Link href="#pricing" />}
                                     size="sm"
                                     className={cn(isScrolled ? 'lg:inline-flex' : 'hidden md:inline-flex')}>
-                                    <Link href="#pricing">
-                                        <span>Get Started</span>
-                                    </Link>
+                                    <span>Start Free Trial</span>
                                 </Button>
                             </div>
                         </div>
@@ -274,10 +277,13 @@ const Logo = ({ className }: { className?: string }) => {
     const logoSrc = resolvedTheme === 'dark' ? '/logo-white.svg' : '/logo-black.svg'
 
     return (
-        <img
+        <OptimizedImage
             src={logoSrc}
-            alt="trimio."
+            alt="Trimio salon management software logo"
+            width={120}
+            height={28}
             className={cn('h-7 w-auto', className)}
+            priority={true}
         />
     )
 }

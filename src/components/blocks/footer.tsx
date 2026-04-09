@@ -15,14 +15,18 @@ export function Footer() {
             Ready to Scale Your Salon Business?
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-center text-lg leading-8 text-primary-foreground/80">
-            Join 4,000+ professionals who trust Trimio to manage their daily operations. Start your 30-day free trial today.
+            Join 1,000+ professionals who trust Trimio to manage their daily operations. Start your 30-day free trial today.
           </p>
           <div className="mt-10 flex justify-center gap-x-6">
             <Button size="lg" variant="secondary" className="rounded-xl px-10 text-base">
-              Start Your Free Trial
+              <Link href="#link">
+                Start Your Free Trial
+              </Link>
             </Button>
             <Button size="lg" variant="ghost" className="text-primary-foreground hover:bg-white/10 rounded-xl">
-              Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="#link">
+                Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>

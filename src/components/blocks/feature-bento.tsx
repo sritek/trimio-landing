@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Shield, Users, Mic, Zap, TrendingUp, Sparkles } from 'lucide-react'
 import { GridVignetteBackground } from '@/components/ui/vignette-grid-background'
 import { cn } from "@/lib/utils"
+import { OptimizedImage } from '@/components/seo/optimized-image'
 
 export function FeatureBentoGrid() {
     return (
@@ -123,7 +124,13 @@ export function FeatureBentoGrid() {
                                             "flex items-center gap-3 p-3 rounded-2xl bg-background border shadow-sm transition-all duration-500",
                                             idx === 1 ? "translate-x-4" : ""
                                           )}>
-                                              <img className="size-8 rounded-full ring-2 ring-primary/10" src={user.avatar} alt="" />
+                                              <OptimizedImage 
+                                                className="size-8 rounded-full ring-2 ring-primary/10" 
+                                                src={user.avatar} 
+                                                alt={`${user.name} from ${user.salon}`}
+                                                width={32}
+                                                height={32}
+                                              />
                                               <div>
                                                 <p className="text-xs font-bold leading-none">{user.name}</p>
                                                 <p className="text-[10px] text-muted-foreground">{user.salon}</p>

@@ -3,58 +3,58 @@ import { motion } from "motion/react";
 
 const testimonials = [
   {
-    text: "Trimio eliminated our front desk chaos completely. The live waitlist and automated scheduling have been a game-changer.",
+    text: "Trimio eliminated our front desk chaos completely. The live waitlist and automated scheduling have been a game-changer for our daily operations.",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop",
     name: "Aisha Patel",
-    role: "Salon Owner",
+    role: "Owner, Glow Salon, Mumbai",
   },
   {
-    text: "The split payment system makes our checkout process frictionless. We no longer make mistakes when clients want to use UPI and cash.",
+    text: "The split payment system makes our checkout process frictionless. We no longer make mistakes when clients want to use UPI and cash together.",
     image: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?q=80&w=150&auto=format&fit=crop",
     name: "Marcus Thorne",
-    role: "Manager, Luxe Spa",
+    role: "Manager, Luxe Spa, Bangalore",
   },
   {
-    text: "Moving our 5 branches to Trimio was shockingly easy. Multi-branch reporting is now instantaneous instead of taking hours to compile.",
+    text: "Moving our 5 branches to Trimio was shockingly easy. Multi-branch reporting is now instantaneous instead of taking hours to compile manually.",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop",
     name: "Sara Lin",
-    role: "Operations Director",
+    role: "Operations Director, Bella Chain, Delhi",
   },
   {
     text: "My stylists finally understand their commissions! The transparent payroll system built into Trimio builds so much trust with my team.",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
     name: "James Kovac",
-    role: "Studio Director",
+    role: "Studio Director, Urban Cuts, Pune",
   },
   {
     text: "The AI Voice Assistant handles our overflow calls seamlessly. We've captured 30% more bookings that previously went to voicemail.",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
     name: "Priya Singh",
-    role: "General Manager",
+    role: "General Manager, Radiance Spa, Hyderabad",
   },
   {
     text: "We used to run out of color tubes mid-service. Trimio's inventory tracking prevents that entirely with smart low-stock warnings.",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
     name: "Elena Rodriguez",
-    role: "Lead Colorist",
+    role: "Lead Colorist, Chroma Studio, Chennai",
   },
   {
-    text: "Marketing integrations let us re-engage clients exactly 6 weeks after their last haircut. It's almost automatic revenue.",
+    text: "Marketing integrations let us re-engage clients exactly 6 weeks after their last haircut. It's almost automatic revenue for us.",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
     name: "David Chen",
-    role: "Marketing Head",
+    role: "Marketing Head, Style Hub, Kolkata",
   },
   {
     text: "An absolutely premium feel. It matches the high-end experience we provide to our salon clients. Easily the best UI we've used.",
     image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=150&auto=format&fit=crop",
     name: "Natasha Roman",
-    role: "Founder",
+    role: "Founder, Elite Beauty Lounge, Gurgaon",
   },
   {
     text: "Support is top-notch. When we needed help setting up GST invoices for our unique structure, the Trimio team walked us right through it.",
     image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=150&auto=format&fit=crop",
     name: "Amit Desai",
-    role: "Finance Manager",
+    role: "Finance Manager, Serenity Spas, Ahmedabad",
   },
 ];
 

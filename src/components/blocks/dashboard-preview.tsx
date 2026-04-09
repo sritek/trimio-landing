@@ -3,6 +3,7 @@
 import React from 'react';
 import { AnimatedGroup } from '@/components/ui/animated-group';
 import { cn } from '@/lib/utils';
+import { OptimizedImage } from '@/components/seo/optimized-image';
 
 export function DashboardPreview() {
   return (
@@ -24,18 +25,22 @@ export function DashboardPreview() {
           <div className="relative">
              {/* Desktop Mockup */}
              <div className="relative mx-auto max-w-[1000px] rounded-2xl border bg-muted p-2 shadow-2xl">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop"
-                  alt="Trimio Desktop Dashboard"
+                  alt="Trimio desktop dashboard showing real-time salon analytics, revenue charts, and staff performance metrics"
+                  width={2000}
+                  height={1125}
                   className="rounded-xl border bg-background object-cover shadow-sm aspect-video"
                 />
                 
                 {/* Mobile Mockup Overlay */}
                 <div className="absolute -bottom-10 -right-10 hidden w-64 rounded-3xl border-8 border-background bg-background shadow-2xl lg:block">
                   <div className="relative overflow-hidden rounded-2xl bg-muted">
-                    <img
+                    <OptimizedImage
                       src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=500&auto=format&fit=crop"
-                      alt="Trimio Mobile Dashboard"
+                      alt="Trimio mobile app showing appointment scheduling and client management on smartphone"
+                      width={500}
+                      height={1056}
                       className="aspect-[9/19] w-full object-cover"
                     />
                   </div>
