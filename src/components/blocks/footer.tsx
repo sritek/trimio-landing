@@ -4,8 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Instagram, Twitter, Linkedin, Facebook } from 'lucide-react';
+import { useContactForm } from '@/components/ui/contact-form';
 
 export function Footer() {
+  const contactForm = useContactForm();
   return (
     <footer className="bg-background border-t">
       {/* Bottom CTA Section */}
@@ -18,15 +20,11 @@ export function Footer() {
             Join 1,000+ professionals who trust Trimio to manage their daily operations. Start your 30-day free trial today.
           </p>
           <div className="mt-10 flex justify-center gap-x-6">
-            <Button size="lg" variant="secondary" className="rounded-xl px-10 text-base">
-              <Link href="#link">
-                Start Your Free Trial
-              </Link>
+            <Button size="lg" variant="secondary" className="rounded-xl px-10 text-base" onClick={() => contactForm.open()}>
+              Start Your Free Trial
             </Button>
-            <Button size="lg" variant="ghost" className="text-primary-foreground hover:bg-white/10 rounded-xl">
-              <Link href="#link">
-                Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+            <Button size="lg" variant="ghost" className="text-primary-foreground hover:bg-white/10 rounded-xl" onClick={() => contactForm.open()}>
+              Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>

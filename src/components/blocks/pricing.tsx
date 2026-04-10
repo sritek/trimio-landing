@@ -7,6 +7,8 @@ import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 import { cn } from "@/lib/utils";
 import NumberFlow from "@number-flow/react";
 import { motion } from "framer-motion";
+import { useContactForm } from "@/components/ui/contact-form";
+import { detectCurrency, convertPrice } from "@/lib/currency";
 
 // Trimio-specific plans but with the User's requested color/structure
 const plans = [
@@ -123,10 +125,13 @@ export function Pricing() {
   const [mounted, setMounted] = useState(false);
   const pricingRef = useRef<HTMLDivElement>(null);
   const [resolvedTheme, setResolvedTheme] = useState('light');
+  const contactForm = useContactForm();
+  const [currency, setCurrency] = useState({ code: "INR", symbol: "₹", rate: 1 });
   
   useEffect(() => {
     setMounted(true);
     setResolvedTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    setCurrency(detectCurrency());
   }, []);
 
   const revealVariants = {
@@ -283,13 +288,12 @@ export function Pricing() {
                 </div>
                 <div className="flex items-baseline mb-2">
                   <span className="text-4xl font-bold">
-                    ₹
+                    {currency.symbol}
                     <NumberFlow
                       format={{
-                        currency: "INR",
                         notation: "standard",
                       }}
-                      value={isYearly ? plan.yearlyPrice : plan.price}
+                      value={convertPrice(isYearly ? plan.yearlyPrice : plan.price, currency)}
                       className="text-4xl font-bold"
                     />
                   </span>
@@ -308,7 +312,7 @@ export function Pricing() {
                       ? "bg-gradient-to-t from-blue-500 to-blue-600 shadow-lg shadow-blue-800 border border-blue-500 text-white hover:opacity-90"
                       : "bg-gradient-to-t from-neutral-200 to-neutral-100 dark:from-neutral-950 dark:to-neutral-600 shadow-lg border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white hover:opacity-90 shadow-neutral-400/20 dark:shadow-neutral-900"
                   )}
-                  onClick={() => {}}
+                  onClick={() => contactForm.open()}
                 >
                   {plan.buttonText}
                 </button>

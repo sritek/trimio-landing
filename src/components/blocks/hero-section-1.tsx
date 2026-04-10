@@ -7,10 +7,12 @@ import { ArrowRight, Menu, X } from 'lucide-react'
 import { GridVignetteBackground } from '@/components/ui/vignette-grid-background'
 import { cn } from '@/lib/utils'
 import { OptimizedImage } from '@/components/seo/optimized-image'
+import { useContactForm } from '@/components/ui/contact-form'
 
 const ThemeToggle = dynamic(() => import('@/components/theme-toggle').then(mod => ({ default: mod.ThemeToggle })), { ssr: false })
 
 export function HeroSection() {
+    const contactForm = useContactForm()
     return (
         <>
             <HeroHeader />
@@ -70,19 +72,19 @@ export function HeroSection() {
                                 <div className="hero-stagger mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
                                     <div className="hero-stagger-item">
                                         <div className="bg-foreground/10 rounded-[14px] border p-0.5">
-                                            <Link
-                                                href="#link"
-                                                className="group/button inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-primary text-primary-foreground text-base font-medium px-5 h-9 transition-all hover:bg-primary/80">
+                                            <button
+                                                onClick={() => contactForm.open()}
+                                                className="group/button inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-primary text-primary-foreground text-base font-medium px-5 h-9 transition-all hover:bg-primary/80 cursor-pointer">
                                                 <span className="text-nowrap">Start Free Trial</span>
-                                            </Link>
+                                            </button>
                                         </div>
                                     </div>
                                     <div className="hero-stagger-item">
-                                        <Link
-                                            href="#link"
-                                            className="inline-flex shrink-0 items-center justify-center rounded-xl text-base font-medium px-5 h-10.5 transition-all hover:bg-muted hover:text-foreground">
+                                        <button
+                                            onClick={() => contactForm.open()}
+                                            className="inline-flex shrink-0 items-center justify-center rounded-xl text-base font-medium px-5 h-10.5 transition-all hover:bg-muted hover:text-foreground cursor-pointer">
                                             <span className="text-nowrap">Watch 2-min Demo</span>
-                                        </Link>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -137,6 +139,7 @@ const menuItems = [
 const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [isScrolled, setIsScrolled] = React.useState(false)
+    const contactForm = useContactForm()
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -199,14 +202,14 @@ const HeroHeader = () => {
                             </div>
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:items-center sm:gap-3 sm:space-y-0 md:w-fit">
                                 <ThemeToggle />
-                                <Link
-                                    href="#pricing"
+                                <button
+                                    onClick={() => contactForm.open()}
                                     className={cn(
-                                      'group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none bg-primary text-primary-foreground [a]:hover:bg-primary/80 h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem]',
+                                      'group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none bg-primary text-primary-foreground [a]:hover:bg-primary/80 h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] cursor-pointer',
                                       isScrolled ? 'lg:inline-flex' : 'hidden md:inline-flex'
                                     )}>
                                     <span>Start Free Trial</span>
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
