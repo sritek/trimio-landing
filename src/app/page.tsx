@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/blocks/hero-section-1";
-import { LazySection } from "@/components/ui/lazy-section";
 
 // Dynamic imports for below-fold sections — code-split from initial bundle
 const LogoCloudSection = dynamic(() => import("@/components/blocks/logo-cloud-section"));
@@ -16,18 +15,10 @@ export default function Home() {
       <div className="font-[family-name:var(--font-geist-sans)]">
         <HeroSection />
         <LogoCloudSection />
-        <LazySection>
-          <FeatureZigzag />
-        </LazySection>
-        <LazySection>
-          <FeatureBentoGrid />
-        </LazySection>
-        <LazySection>
-          <Testimonials />
-        </LazySection>
-        <LazySection>
-          <Pricing />
-        </LazySection>
+        <FeatureZigzag />
+        <FeatureBentoGrid />
+        <Testimonials />
+        <Pricing />
         <FAQ />
         <Footer />
       </div>

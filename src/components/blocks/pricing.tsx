@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Sparkles as SparklesComp } from "@/components/ui/sparkles";
 import { TimelineContent } from "@/components/ui/timeline-animation";
@@ -67,8 +66,11 @@ const plans = [
 
 const PricingSwitch = ({ onSwitch }: { onSwitch: (value: string) => void }) => {
   const [selected, setSelected] = useState("0");
-  const { theme, resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'));
+  }, []);
 
   const handleSwitch = (value: string) => {
     setSelected(value);
@@ -120,10 +122,11 @@ export function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pricingRef = useRef<HTMLDivElement>(null);
-  const { resolvedTheme } = useTheme();
+  const [resolvedTheme, setResolvedTheme] = useState('light');
   
   useEffect(() => {
     setMounted(true);
+    setResolvedTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
   }, []);
 
   const revealVariants = {
