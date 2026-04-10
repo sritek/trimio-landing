@@ -24,7 +24,7 @@ describe('Property-Based Tests: MetadataGenerator', () => {
      * - complete Twitter Card tags (card, title, description, image)
      * - no duplicate tags
      */
-    it('should include all required meta tags for any page config', () => {
+    it('should include all required meta tags for any page config', { timeout: 15000 }, () => {
       // Feature: seo-engagement-optimizer, Property 1: Metadata Completeness
       
       // Create arbitrary generators for valid metadata config

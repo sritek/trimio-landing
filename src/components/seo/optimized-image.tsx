@@ -110,6 +110,11 @@ export function OptimizedImage({
     className,
   };
 
+  // Add fetchPriority for LCP images
+  if (priority) {
+    imageProps.fetchPriority = 'high';
+  }
+
   // Handle fill mode vs explicit dimensions
   if (fill) {
     imageProps.fill = true;

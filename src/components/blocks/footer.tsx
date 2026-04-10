@@ -41,16 +41,16 @@ export function Footer() {
               The operating system for modern salon and spa chains. Empowering beauty professionals to scale with intelligence.
             </p>
             <div className="flex space-x-6">
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
+              <Link href="#" aria-label="Trimio on Instagram" className="text-muted-foreground hover:text-foreground">
                 <Instagram className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
+              <Link href="#" aria-label="Trimio on Twitter" className="text-muted-foreground hover:text-foreground">
                 <Twitter className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
+              <Link href="#" aria-label="Trimio on LinkedIn" className="text-muted-foreground hover:text-foreground">
                 <Linkedin className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
+              <Link href="#" aria-label="Trimio on Facebook" className="text-muted-foreground hover:text-foreground">
                 <Facebook className="h-6 w-6" />
               </Link>
             </div>

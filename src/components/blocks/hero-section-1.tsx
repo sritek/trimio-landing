@@ -35,7 +35,7 @@ export function HeroSection() {
     return (
         <>
             <HeroHeader />
-            <main className="overflow-hidden">
+            <main id="main-content" className="overflow-hidden">
                 <div
                     aria-hidden
                     className="z-[2] absolute inset-0 pointer-events-none isolate opacity-50 contain-strict hidden lg:block">
@@ -76,7 +76,7 @@ export function HeroSection() {
 
                                     <h1
                                         className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                                        The Only Management Software Built for Modern Salons
+                                        The Only Salon Management Software Built for Modern Salons
                                     </h1>
                                     <p
                                         className="mx-auto mt-8 max-w-2xl text-balance text-lg">
@@ -89,8 +89,8 @@ export function HeroSection() {
                                         container: {
                                             visible: {
                                                 transition: {
-                                                    staggerChildren: 0.05,
-                                                    delayChildren: 0.75,
+                                                    staggerChildren: 0.03,
+                                                    delayChildren: 0.3,
                                                 },
                                             },
                                         },
@@ -119,7 +119,7 @@ export function HeroSection() {
                                     </Button>
                                 </AnimatedGroup>
 
-                                <p className="mt-6 text-sm text-gray-500 dark:text-gray-400 text-center">
+                                <p className="mt-6 text-sm text-gray-600 dark:text-gray-300 text-center">
                                     Trusted by 500+ salons · No credit card required · Cancel anytime
                                 </p>
                             </div>
@@ -130,8 +130,8 @@ export function HeroSection() {
                                 container: {
                                     visible: {
                                         transition: {
-                                            staggerChildren: 0.05,
-                                            delayChildren: 0.75,
+                                            staggerChildren: 0.03,
+                                            delayChildren: 0.3,
                                         },
                                     },
                                 },
@@ -145,7 +145,7 @@ export function HeroSection() {
                                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
                                     <OptimizedImage
                                         className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block object-cover"
-                                        src="/hero-dark.png"
+                                        src="/hero-dark.webp"
                                         alt="Trimio salon management software dashboard showing appointment scheduling, client management, and real-time analytics"
                                         width={2700}
                                         height={1440}
@@ -153,7 +153,7 @@ export function HeroSection() {
                                     />
                                     <OptimizedImage
                                         className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden object-cover"
-                                        src="/hero-light.png"
+                                        src="/hero-light.webp"
                                         alt="Trimio salon management software dashboard showing appointment scheduling, client management, and real-time analytics"
                                         width={2700}
                                         height={1440}
@@ -243,12 +243,14 @@ const HeroHeader = () => {
                             </div>
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:items-center sm:gap-3 sm:space-y-0 md:w-fit">
                                 <ThemeToggle />
-                                <Button
-                                    render={<Link href="#pricing" />}
-                                    size="sm"
-                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden md:inline-flex')}>
+                                <Link
+                                    href="#pricing"
+                                    className={cn(
+                                      'group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none bg-primary text-primary-foreground [a]:hover:bg-primary/80 h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem]',
+                                      isScrolled ? 'lg:inline-flex' : 'hidden md:inline-flex'
+                                    )}>
                                     <span>Start Free Trial</span>
-                                </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
