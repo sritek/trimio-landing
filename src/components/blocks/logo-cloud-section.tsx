@@ -1,16 +1,16 @@
 import { LogoCloud } from "@/components/ui/logo-cloud-3";
 
 const logos = [
-  { src: "/customers/1.png", alt: "Salon customer testimonial logo", width: 128, height: 128 },
-  { src: "/customers/2.png", alt: "Beauty spa client logo", width: 128, height: 128 },
-  { src: "/customers/3.png", alt: "Wellness center partner logo", width: 128, height: 128 },
-  { src: "/customers/4.png", alt: "Hair salon client testimonial", width: 128, height: 128 },
-  { src: "/customers/5.png", alt: "Beauty business customer logo", width: 128, height: 128 },
-  { src: "/customers/6.png", alt: "Spa management client logo", width: 128, height: 128 },
-  { src: "/customers/7.png", alt: "Salon chain partner logo", width: 128, height: 128 },
-  { src: "/customers/8.png", alt: "Beauty industry client testimonial", width: 128, height: 128 },
-  { src: "/customers/9.png", alt: "Wellness business customer logo", width: 128, height: 128 },
-  { src: "/customers/10.png", alt: "Premium salon client logo", width: 128, height: 128 },
+  { src: "/customers/1.webp", alt: "Salon customer testimonial logo", width: 128, height: 128 },
+  { src: "/customers/2.webp", alt: "Beauty spa client logo", width: 128, height: 128 },
+  { src: "/customers/3.webp", alt: "Wellness center partner logo", width: 128, height: 128 },
+  { src: "/customers/4.webp", alt: "Hair salon client testimonial", width: 128, height: 128 },
+  { src: "/customers/5.webp", alt: "Beauty business customer logo", width: 128, height: 128 },
+  { src: "/customers/6.webp", alt: "Spa management client logo", width: 128, height: 128 },
+  { src: "/customers/7.webp", alt: "Salon chain partner logo", width: 128, height: 128 },
+  { src: "/customers/8.webp", alt: "Beauty industry client testimonial", width: 128, height: 128 },
+  { src: "/customers/9.webp", alt: "Wellness business customer logo", width: 128, height: 128 },
+  { src: "/customers/10.webp", alt: "Premium salon client logo", width: 128, height: 128 },
 ];
 
 export default function LogoCloudSection() {

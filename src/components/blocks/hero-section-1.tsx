@@ -2,13 +2,14 @@
 
 import React from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { GridVignetteBackground } from '@/components/ui/vignette-grid-background'
-import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
 import { OptimizedImage } from '@/components/seo/optimized-image'
+
+const ThemeToggle = dynamic(() => import('@/components/theme-toggle').then(mod => ({ default: mod.ThemeToggle })), { ssr: false })
 
 export function HeroSection() {
     return (
@@ -110,7 +111,7 @@ export function HeroSection() {
                                         alt="Trimio salon management software dashboard showing appointment scheduling, client management, and real-time analytics"
                                         width={2700}
                                         height={1440}
-                                        priority={true}
+                                        priority={false}
                                     />
                                     <OptimizedImage
                                         className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden object-cover"
@@ -222,31 +223,22 @@ const HeroHeader = () => {
 }
 
 const Logo = ({ className }: { className?: string }) => {
-    const { resolvedTheme } = useTheme()
-    const [mounted, setMounted] = React.useState(false)
-
-    React.useEffect(() => {
-        setMounted(true)
-    }, [])
-
-    if (!mounted) {
-        return (
-            <span className={cn('text-2xl font-bold tracking-tighter text-foreground', className)}>
-                trimio.
-            </span>
-        )
-    }
-
-    const logoSrc = resolvedTheme === 'dark' ? '/logo-white.svg' : '/logo-black.svg'
-
     return (
-        <OptimizedImage
-            src={logoSrc}
-            alt="Trimio salon management software logo"
-            width={120}
-            height={28}
-            className={cn('h-7 w-auto', className)}
-            priority={true}
-        />
+        <>
+            <img
+                src="/logo-black.svg"
+                alt="Trimio salon management software logo"
+                width={120}
+                height={28}
+                className={cn('h-7 w-auto dark:hidden', className)}
+            />
+            <img
+                src="/logo-white.svg"
+                alt="Trimio salon management software logo"
+                width={120}
+                height={28}
+                className={cn('h-7 w-auto hidden dark:block', className)}
+            />
+        </>
     )
 }
