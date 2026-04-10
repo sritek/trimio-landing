@@ -4,7 +4,6 @@ import React from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { ArrowRight, Menu, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { GridVignetteBackground } from '@/components/ui/vignette-grid-background'
 import { cn } from '@/lib/utils'
 import { OptimizedImage } from '@/components/seo/optimized-image'
@@ -71,24 +70,19 @@ export function HeroSection() {
                                 <div className="hero-stagger mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
                                     <div className="hero-stagger-item">
                                         <div className="bg-foreground/10 rounded-[14px] border p-0.5">
-                                            <Button
-                                                size="lg"
-                                                className="rounded-xl px-5 text-base">
-                                                <Link href="#link">
-                                                    <span className="text-nowrap">Start Free Trial</span>
-                                                </Link>
-                                            </Button>
+                                            <Link
+                                                href="#link"
+                                                className="group/button inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-primary text-primary-foreground text-base font-medium px-5 h-9 transition-all hover:bg-primary/80">
+                                                <span className="text-nowrap">Start Free Trial</span>
+                                            </Link>
                                         </div>
                                     </div>
                                     <div className="hero-stagger-item">
-                                        <Button
-                                            size="lg"
-                                            variant="ghost"
-                                            className="h-10.5 rounded-xl px-5">
-                                            <Link href="#link">
-                                                <span className="text-nowrap">Watch 2-min Demo</span>
-                                            </Link>
-                                        </Button>
+                                        <Link
+                                            href="#link"
+                                            className="inline-flex shrink-0 items-center justify-center rounded-xl text-base font-medium px-5 h-10.5 transition-all hover:bg-muted hover:text-foreground">
+                                            <span className="text-nowrap">Watch 2-min Demo</span>
+                                        </Link>
                                     </div>
                                 </div>
 
