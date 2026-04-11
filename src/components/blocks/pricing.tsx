@@ -71,7 +71,11 @@ const PricingSwitch = ({ onSwitch }: { onSwitch: (value: string) => void }) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'));
+    const updateTheme = () => setIsDark(document.documentElement.classList.contains('dark'));
+    updateTheme();
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
   }, []);
 
   const handleSwitch = (value: string) => {
@@ -130,8 +134,23 @@ export function Pricing() {
   
   useEffect(() => {
     setMounted(true);
-    setResolvedTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    setCurrency(detectCurrency());
+    const detected = detectCurrency();
+    console.log("[Trimio Currency]", {
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      locale: navigator.language,
+      detected: detected.code,
+      symbol: detected.symbol,
+    });
+    setCurrency(detected);
+
+    const updateTheme = () => {
+      setResolvedTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    };
+    updateTheme();
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
   }, []);
 
   const revealVariants = {

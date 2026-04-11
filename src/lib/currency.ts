@@ -1,66 +1,143 @@
 /**
- * Locale-based currency detection and conversion.
- * Base prices are in INR. Converted at approximate fixed rates.
+ * Enterprise-grade locale-based currency detection.
+ * 
+ * Detection priority:
+ * 1. Timezone (most reliable — reflects physical location)
+ * 2. Browser locale region code (fallback)
+ * 3. Default to INR (primary market)
+ * 
+ * Base prices are always stored in INR.
  */
 
-interface CurrencyConfig {
+export interface CurrencyConfig {
   code: string;
   symbol: string;
-  rate: number; // 1 INR = rate in target currency
+  rate: number;
 }
 
-const currencyMap: Record<string, CurrencyConfig> = {
+const CURRENCIES: Record<string, CurrencyConfig> = {
+  INR: { code: "INR", symbol: "₹", rate: 1 },
   USD: { code: "USD", symbol: "$", rate: 0.012 },
   EUR: { code: "EUR", symbol: "€", rate: 0.011 },
   GBP: { code: "GBP", symbol: "£", rate: 0.0095 },
   CAD: { code: "CAD", symbol: "CA$", rate: 0.016 },
   AUD: { code: "AUD", symbol: "A$", rate: 0.018 },
-  AED: { code: "AED", symbol: "AED", rate: 0.044 },
+  AED: { code: "AED", symbol: "AED ", rate: 0.044 },
   SGD: { code: "SGD", symbol: "S$", rate: 0.016 },
   JPY: { code: "JPY", symbol: "¥", rate: 1.78 },
-  INR: { code: "INR", symbol: "₹", rate: 1 },
 };
 
-// Map locale/region to currency
-const regionToCurrency: Record<string, string> = {
-  US: "USD", GB: "GBP", CA: "CAD", AU: "AUD",
-  DE: "EUR", FR: "EUR", IT: "EUR", ES: "EUR", NL: "EUR", BE: "EUR", AT: "EUR", PT: "EUR", IE: "EUR", FI: "EUR", GR: "EUR",
-  AE: "AED", SA: "AED", QA: "AED", KW: "AED", BH: "AED", OM: "AED",
-  SG: "SGD", JP: "JPY", IN: "INR",
+const DEFAULT_CURRENCY = CURRENCIES.INR;
+
+/**
+ * Maps IANA timezone substrings to currency codes.
+ * Checked via tz.includes(key) — order matters for overlapping matches.
+ */
+const TZ_TO_CURRENCY: [string, string][] = [
+  // India — check first since this is the primary market
+  ["Calcutta", "INR"],
+  ["Kolkata", "INR"],
+  ["Chennai", "INR"],
+  ["Mumbai", "INR"],
+  // Middle East
+  ["Dubai", "AED"],
+  ["Riyadh", "AED"],
+  ["Qatar", "AED"],
+  ["Bahrain", "AED"],
+  ["Muscat", "AED"],
+  ["Kuwait", "AED"],
+  // Asia Pacific
+  ["Singapore", "SGD"],
+  ["Tokyo", "JPY"],
+  ["Osaka", "JPY"],
+  // UK specifically (before broader Europe check)
+  ["London", "GBP"],
+  // Canada specifically (before broader America check)
+  ["Toronto", "CAD"],
+  ["Vancouver", "CAD"],
+  ["Montreal", "CAD"],
+  ["Edmonton", "CAD"],
+  ["Winnipeg", "CAD"],
+];
+
+/**
+ * Broader timezone prefix checks (checked after specific city matches)
+ */
+const TZ_PREFIX_TO_CURRENCY: [string, string][] = [
+  ["Asia/Kolkata", "INR"],
+  ["Asia/Calcutta", "INR"],
+  ["Australia/", "AUD"],
+  ["Europe/", "EUR"],
+  ["America/", "USD"],
+];
+
+/**
+ * Maps ISO region codes to currency codes.
+ * Used as fallback when timezone detection fails.
+ */
+const REGION_TO_CURRENCY: Record<string, string> = {
+  IN: "INR",
+  US: "USD",
+  GB: "GBP",
+  CA: "CAD",
+  AU: "AUD",
+  AE: "AED",
+  SG: "SGD",
+  JP: "JPY",
+  DE: "EUR", FR: "EUR", IT: "EUR", ES: "EUR", NL: "EUR",
+  BE: "EUR", AT: "EUR", PT: "EUR", IE: "EUR", FI: "EUR", GR: "EUR",
+  SA: "AED", QA: "AED", KW: "AED", BH: "AED", OM: "AED",
 };
+
+function detectFromTimezone(): string | null {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (!tz) return null;
+
+    // Check specific city names first
+    for (const [city, code] of TZ_TO_CURRENCY) {
+      if (tz.includes(city)) return code;
+    }
+
+    // Check broader prefixes
+    for (const [prefix, code] of TZ_PREFIX_TO_CURRENCY) {
+      if (tz.startsWith(prefix)) return code;
+    }
+  } catch {}
+  return null;
+}
+
+function detectFromLocale(): string | null {
+  try {
+    const locale = navigator.language;
+    if (!locale) return null;
+
+    // "en-IN" → "IN", "en-US" → "US"
+    const parts = locale.split("-");
+    if (parts.length >= 2) {
+      const region = parts[parts.length - 1].toUpperCase();
+      if (REGION_TO_CURRENCY[region]) return REGION_TO_CURRENCY[region];
+    }
+  } catch {}
+  return null;
+}
 
 export function detectCurrency(): CurrencyConfig {
-  if (typeof navigator === "undefined") return currencyMap.INR;
+  if (typeof window === "undefined") return DEFAULT_CURRENCY;
 
-  const locale = navigator.language || "en-IN";
-  // Extract region: "en-US" → "US", "en" → try timezone
-  let region = locale.split("-")[1]?.toUpperCase();
+  // 1. Timezone first — most reliable for physical location
+  const fromTz = detectFromTimezone();
+  if (fromTz && CURRENCIES[fromTz]) return CURRENCIES[fromTz];
 
-  if (!region) {
-    // Fallback: guess from timezone
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (tz.startsWith("America/")) region = "US";
-      else if (tz.startsWith("Europe/London")) region = "GB";
-      else if (tz.startsWith("Europe/")) region = "DE"; // EUR
-      else if (tz.startsWith("Asia/Kolkata") || tz.startsWith("Asia/Calcutta")) region = "IN";
-      else if (tz.startsWith("Asia/Dubai")) region = "AE";
-      else if (tz.startsWith("Asia/Singapore")) region = "SG";
-      else if (tz.startsWith("Asia/Tokyo")) region = "JP";
-      else if (tz.startsWith("Australia/")) region = "AU";
-    } catch {}
-  }
+  // 2. Browser locale region as fallback
+  const fromLocale = detectFromLocale();
+  if (fromLocale && CURRENCIES[fromLocale]) return CURRENCIES[fromLocale];
 
-  const currencyCode = regionToCurrency[region || "IN"] || "USD";
-  return currencyMap[currencyCode] || currencyMap.INR;
+  // 3. Default
+  return DEFAULT_CURRENCY;
 }
 
 export function convertPrice(inrPrice: number, currency: CurrencyConfig): number {
   if (currency.code === "INR") return inrPrice;
   return Math.round(inrPrice * currency.rate);
-}
-
-export function formatPrice(inrPrice: number, currency: CurrencyConfig): string {
-  const converted = convertPrice(inrPrice, currency);
-  return `${currency.symbol}${converted.toLocaleString()}`;
 }
