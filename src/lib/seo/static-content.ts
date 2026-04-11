@@ -58,16 +58,8 @@ export const homepageFAQs: FAQItem[] = [
     answer: 'Yes. Trimio automatically sends appointment reminders via SMS and email at intervals you configure — typically 24 hours and 2 hours before the appointment. This significantly reduces no-shows. You can customize the reminder message and timing from your settings panel.',
   },
   {
-    question: 'What payment methods does Trimio support?',
-    answer: 'Trimio\'s built-in POS supports cash, card (via integrated payment terminals), UPI, and online payments collected at the time of booking. All transactions are recorded automatically and reflected in your daily revenue reports.',
-  },
-  {
     question: 'Is my salon\'s client data secure on Trimio?',
     answer: 'Yes. All data is encrypted in transit (TLS 1.3) and at rest. Trimio is hosted on enterprise-grade infrastructure with daily backups. You own your client data and can export it at any time. We do not sell or share your data with third parties.',
-  },
-  {
-    question: 'How long does it take to set up Trimio for my salon?',
-    answer: 'Most salons are fully set up within one day. The onboarding flow walks you through adding your services, staff, and working hours. If you have existing client data in a spreadsheet, our team can help you import it. We also offer a free onboarding call for new accounts.',
   },
 ];
 

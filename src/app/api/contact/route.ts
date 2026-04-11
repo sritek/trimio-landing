@@ -1,15 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
+import { rateLimit } from "@/lib/rate-limit";
+import { contactSchema } from "@/lib/validations/contact";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, message, timezone } = body;
+    // Rate limit: 5 submissions per IP per hour
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+      || request.headers.get("x-real-ip")
+      || "anonymous";
 
-    if (!name?.trim() || !email?.trim() || !message?.trim()) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    const { success: rateLimitOk } = rateLimit(ip, 5, 3600000);
+    if (!rateLimitOk) {
+      return NextResponse.json(
+        { success: false, error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
     }
 
+    const body = await request.json();
+
+    // Honeypot check — bots fill hidden fields
+    if (body.honeypot) {
+      return NextResponse.json({ success: true });
+    }
+
+    // Zod validation
+    const parsed = contactSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json(
+        { success: false, error: "Validation failed", details: parsed.error.flatten().fieldErrors },
+        { status: 400 }
+      );
+    }
+
+    const data = parsed.data;
     const credentials = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
     const sheetId = process.env.GOOGLE_SHEET_ID;
 
@@ -26,20 +51,21 @@ export async function POST(request: NextRequest) {
     const sheets = google.sheets({ version: "v4", auth });
 
     const now = new Date();
-    const date = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+    const date = `${String(now.getDate()).padStart(2, "0")}/${String(now.getMonth() + 1).padStart(2, "0")}/${now.getFullYear()}`;
 
-    await sheets.spreadsheets.values.append({
+    // Find next empty row
+    const existing = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
-      range: "Sheet1!A:E",
+      range: "Sheet1!A:A",
+    });
+    const nextRow = (existing.data.values?.length || 1) + 1;
+
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: sheetId,
+      range: `Sheet1!A${nextRow}:E${nextRow}`,
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[
-          date,
-          name.trim(),
-          email.trim(),
-          message.trim(),
-          timezone || "Unknown",
-        ]],
+        values: [[date, data.name, data.email, data.message, data.timezone || "Unknown"]],
       },
     });
 
