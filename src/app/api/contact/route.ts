@@ -53,17 +53,11 @@ export async function POST(request: NextRequest) {
     const now = new Date();
     const date = `${String(now.getDate()).padStart(2, "0")}/${String(now.getMonth() + 1).padStart(2, "0")}/${now.getFullYear()}`;
 
-    // Find next empty row
-    const existing = await sheets.spreadsheets.values.get({
+    await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
-      range: "Sheet1!A:A",
-    });
-    const nextRow = (existing.data.values?.length || 1) + 1;
-
-    await sheets.spreadsheets.values.update({
-      spreadsheetId: sheetId,
-      range: `Sheet1!A${nextRow}:E${nextRow}`,
+      range: "Sheet1!A:E",
       valueInputOption: "USER_ENTERED",
+      insertDataOption: "INSERT_ROWS",
       requestBody: {
         values: [[date, data.name, data.email, data.message, data.timezone || "Unknown"]],
       },

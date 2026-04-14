@@ -6,29 +6,31 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Instagram, Twitter, Linkedin, Facebook } from 'lucide-react';
 import { useContactForm } from '@/components/ui/contact-form';
 
-export function Footer() {
+export function Footer({ hideCta = false }: { hideCta?: boolean }) {
   const contactForm = useContactForm();
   return (
     <footer className="bg-background border-t">
       {/* Bottom CTA Section */}
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-        <div className="relative isolate overflow-hidden bg-primary px-6 py-24 shadow-2xl rounded-3xl sm:px-24">
-          <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
-            Ready to Scale Your Salon Business?
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-center text-lg leading-8 text-primary-foreground/80">
-            Join 1,000+ professionals who trust Trimio to manage their daily operations. Start your 30-day free trial today.
-          </p>
-          <div className="mt-10 flex justify-center gap-x-6">
-            <Button size="lg" variant="secondary" className="rounded-xl px-10 text-base" onClick={() => contactForm.open()}>
-              Start Your Free Trial
-            </Button>
-            <Button size="lg" variant="ghost" className="text-primary-foreground hover:bg-white/10 rounded-xl" onClick={() => contactForm.open()}>
-              Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+      {!hideCta && (
+        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+          <div className="relative isolate overflow-hidden bg-primary px-6 py-24 shadow-2xl rounded-3xl sm:px-24">
+            <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
+              Ready to Scale Your Salon Business?
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-center text-lg leading-8 text-primary-foreground/80">
+              Join 1,000+ professionals who trust Trimio to manage their daily operations. Start your 30-day free trial today.
+            </p>
+            <div className="mt-10 flex justify-center gap-x-6">
+              <Button size="lg" variant="secondary" className="rounded-xl px-10 text-base" onClick={() => contactForm.open()}>
+                Start Your Free Trial
+              </Button>
+              <Button size="lg" variant="ghost" className="text-primary-foreground hover:bg-white/10 rounded-xl" onClick={() => contactForm.open()}>
+                Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 lg:px-8">
@@ -90,6 +92,7 @@ export function Footer() {
                   <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy Policy</Link></li>
                   <li><Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">Terms of Service</Link></li>
                   <li><Link href="#" className="text-sm text-muted-foreground hover:text-foreground">Cookie Policy</Link></li>
+                  <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact Us</Link></li>
                 </ul>
               </div>
             </div>

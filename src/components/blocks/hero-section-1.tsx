@@ -134,6 +134,7 @@ const menuItems = [
     { name: 'Pricing', href: '#pricing' },
     { name: 'About', href: '#about' },
     { name: 'FAQ', href: '#faq' },
+    { name: 'Contact', href: '/contact' },
 ]
 
 const HeroHeader = () => {

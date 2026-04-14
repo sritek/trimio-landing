@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   const lastUpdated = 'April 11, 2026'
-  const contactEmail = 'privacy@trimio.in'
+  const contactEmail = 'business.trimio@gmail.com'
   const companyName = 'Trimio'
   const websiteUrl = 'https://trimio.in'
 

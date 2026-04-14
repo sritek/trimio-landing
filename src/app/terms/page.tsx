@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 }
 
 export default function TermsPage() {
-  const lastUpdated = 'April 11, 2026'
-  const contactEmail = 'legal@trimio.in'
+  const lastUpdated = 'April 14, 2026'
+  const contactEmail = 'business.trimio@gmail.com'
 
   return (
     <main id="main-content" className="min-h-screen bg-background">

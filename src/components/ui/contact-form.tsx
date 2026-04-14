@@ -3,12 +3,6 @@
 import React, { createContext, useContext, useState, useCallback, useMemo } from "react";
 import { User, Mail, ArrowRight, X } from "lucide-react";
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
 interface ContactFormContextValue {
   open: () => void;
 }
@@ -151,7 +145,7 @@ function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
       <h2 className="text-2xl font-bold py-4 text-center text-foreground">Let's Get In Touch.</h2>
       <p className="text-sm text-muted-foreground pb-6 text-center">
         Or reach out to us at{" "}
-        <a href="mailto:hello@trimio.in" className="text-foreground underline underline-offset-2 hover:opacity-80">hello@trimio.in</a>
+        <a href="mailto:business.trimio@gmail.com" className="text-foreground underline underline-offset-2 hover:opacity-80">business.trimio@gmail.com</a>
       </p>
 
       <div className="w-full space-y-4">
