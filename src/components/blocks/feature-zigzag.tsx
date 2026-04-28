@@ -279,7 +279,7 @@ function InteractivePayrollCard() {
         <div className="space-y-4">
           <motion.div layout className="flex justify-between items-center">
             <span className="text-muted-foreground">Service revenue</span>
-            <motion.span key={current.rev} initial={{ opacity: 0, x:-10 }} animate={{ opacity: 1, x:0 }} className="font-semibold text-foreground">₹{current.rev.toLocaleString()}</motion.span>
+            <motion.span key={current.rev} initial={{ opacity: 0, x:-10 }} animate={{ opacity: 1, x:0 }} className="font-semibold text-foreground">₹{current.rev.toLocaleString('en-IN')}</motion.span>
           </motion.div>
 
           <motion.div 
@@ -291,20 +291,20 @@ function InteractivePayrollCard() {
               Commission (12%)
             </span>
             <motion.span key={current.comm} initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="font-extrabold text-primary text-xl">
-              ₹{current.comm.toLocaleString()}
+              ₹{current.comm.toLocaleString('en-IN')}
             </motion.span>
           </motion.div>
           
           <motion.div layout className="flex justify-between items-center">
             <span className="text-muted-foreground">Base salary</span>
-            <span className="font-medium text-foreground">₹{current.base.toLocaleString()}</span>
+            <span className="font-medium text-foreground">₹{current.base.toLocaleString('en-IN')}</span>
           </motion.div>
         </div>
         
         <div className="mt-6 pt-4 border-t border-dashed flex justify-between items-center text-xl sm:text-2xl">
           <span className="font-bold text-foreground flex items-center"><Sparkles className="w-5 h-5 mr-2 text-primary" /> Net Payout</span>
           <motion.span key={current.comm+current.base} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="font-black text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/70">
-            ₹{(current.comm + current.base).toLocaleString()}
+            ₹{(current.comm + current.base).toLocaleString('en-IN')}
           </motion.span>
         </div>
       </div>

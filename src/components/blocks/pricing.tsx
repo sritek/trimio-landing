@@ -15,8 +15,8 @@ const plans = [
   {
     name: "Starter",
     description: "Great for small salons and startups looking to digitize their operations with Trimio",
-    price: 799,
-    yearlyPrice: 8399,
+    price: 699,
+    yearlyPrice: 6999,
     buttonText: "Get started",
     buttonVariant: "outline" as const,
     includes: [
