@@ -11,6 +11,8 @@ import { useContactForm } from "@/components/ui/contact-form";
 import { detectCurrency, convertPrice } from "@/lib/currency";
 
 // Trimio-specific plans but with the User's requested color/structure
+type PlanFeature = string | { text: string; chargeable: boolean };
+
 const plans = [
   {
     name: "Starter",
@@ -40,12 +42,12 @@ const plans = [
     includes: [
       "Everything in Starter, plus:",
       "Up to 20 staff members",
-      "AI-Voice Booking Assistant",
+      { text: "AI-Voice Booking Assistant", chargeable: true },
       "WhatsApp automated marketing",
       "Advanced commission tracking",
       "Loyalty program management",
       "Custom branded app",
-    ],
+    ] as PlanFeature[],
   },
   {
     name: "Enterprise",
@@ -284,11 +286,11 @@ export function Pricing() {
             animationNum={2 + index}
             timelineRef={pricingRef}
             customVariants={revealVariants}
-            className="flex-1"
+            className="flex-1 overflow-visible hover:z-[60]"
           >
             <Card
               className={cn(
-                "relative flex flex-col h-full text-foreground border shadow-sm transition-colors duration-300",
+                "relative flex flex-col h-full text-foreground border shadow-sm transition-colors duration-300 overflow-visible",
                 isDark 
                   ? "bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900 border-neutral-800 shadow-[0px_0px_100px_-20px_#3131f5]"
                   : "bg-gradient-to-b from-neutral-50 via-white to-neutral-50 border-neutral-200 shadow-[0px_20px_80px_-25px_#3131f560]",
@@ -338,18 +340,33 @@ export function Pricing() {
 
                 <div className="space-y-4 pt-4 border-t border-neutral-200 dark:border-neutral-700 mt-auto">
                   <h4 className="font-bold text-base mb-3 text-foreground">
-                    {plan.includes[0]}
+                    {typeof plan.includes[0] === 'string' ? plan.includes[0] : (plan.includes[0] as { text: string }).text}
                   </h4>
                   <ul className="space-y-3">
-                    {plan.includes.slice(1).map((feature, featureIndex) => (
-                      <li
-                        key={featureIndex}
-                        className="flex items-center gap-3"
-                      >
-                        <span className="h-2 w-2 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </li>
-                    ))}
+                    {plan.includes.slice(1).map((feature, featureIndex) => {
+                      const isChargeable = typeof feature === 'object' && feature.chargeable;
+                      const featureText = typeof feature === 'string' ? feature : feature.text;
+                      return (
+                        <li
+                          key={featureIndex}
+                          className="flex items-center gap-3"
+                        >
+                          <span className="h-2 w-2 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
+                          <span className="text-sm text-muted-foreground">
+                            {featureText}
+                            {isChargeable && (
+                              <span className="relative group/tip ml-0.5 cursor-help inline-block">
+                                <span className="text-blue-500 font-medium">*</span>
+                                <span className="fixed-tooltip pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-1.5 text-xs font-medium text-white bg-neutral-900 dark:bg-neutral-100 dark:text-neutral-900 rounded-lg opacity-0 invisible group-hover/tip:opacity-100 group-hover/tip:visible transition-all whitespace-nowrap shadow-lg z-[9999]">
+                                  Pay-as-you-use · Charged based on usage
+                                  <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-900 dark:border-t-neutral-100"></span>
+                                </span>
+                              </span>
+                            )}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </CardContent>
